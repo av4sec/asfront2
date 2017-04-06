@@ -9,6 +9,6 @@ describe('asfront2 App', () => {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('asfront works!');
+    expect(page.getParagraphText()).toContain('asfront2 works!');
   });
 });

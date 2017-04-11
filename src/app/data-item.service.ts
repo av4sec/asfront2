@@ -40,12 +40,15 @@ export class DataItemService {
   }
 
   getAcodes(): Promise<Acode[]> {
-    const url = `${this.baseUrl}acode`;
+    // @fixme: This has to be adjusted when our backend supports acode
+    //const url = `${this.baseUrl}acode`;
+    const url = `${this.baseUrl}role`;
     return this.http.get(url)
       .toPromise()
       .then(response => {
-        // for all DataItems we create the corresponding Acode objects
-        let dataItems = response.json() as DataItem[];
+        // @fixme: here we generate fake Acodes from Roles
+        let text = response.text().replace(/Role/g, "Acode").replace(/role/g, 'acode').replace(/100/g, '540');
+        let dataItems = JSON.parse(text) as DataItem[];
         return dataItems.map(dataItem => new Acode(dataItem));
       })
       .catch(this.handleError);

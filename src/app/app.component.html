@@ -1,10 +1,40 @@
 <asfront-nav></asfront-nav>
 <div class="container">
   <div class="starter-template">
-  <h1>
-    <p class="lead"># {{title}} #</p>
-  </h1>
+    <h1>
+      <p class="lead"># {{title}} #</p>
+    </h1>
   </div>
   <router-outlet></router-outlet>
+
+  <h3>Roles</h3>
+  <ul class="roles">
+    <li *ngFor="let item of roles" class="role-item">
+      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
+      <span>{{item.extid}}</span>
+      <span>{{item.name}}</span>
+      <span>{{item.charid}}</span>
+    </li>
+  </ul>
+
+  <h3>Acodes</h3>
+  <ul class="acodes">
+    <li *ngFor="let item of acodes" class="acode-item" [class.selected]="item.extid%3==2">
+      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
+      <span>{{item.extid}}</span>
+      <span>{{item.name}}</span>
+      <span>{{item.charid}}</span>
+    </li>
+  </ul>
+
+  <h3>Mixed Item List</h3>
+  <ul class="items">
+    <li *ngFor="let item of items" [ngClass]="{'role-item':item.constructor.name === 'Role','acode-item':item.constructor.name === 'Acode','selected':item.extid%3==0}">
+      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
+      <span>{{item.extid}}</span>
+      <span>{{item.name}}</span>
+      <span>{{item.charid}}</span>
+    </li>
+  </ul>
 </div>
 <asfront-footer></asfront-footer>

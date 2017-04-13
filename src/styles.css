@@ -1,13 +1,156 @@
 /* You can add global styles to this file, and also import other style files */
+
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   padding-top: 5rem;
   margin-bottom: 40px;
 }
+
 .starter-template {
   padding: 3rem 1.5rem;
   text-align: center;
+}
+
+
+/* List of colors for our item visualisations:
+Item type     Color   Selected Color
+  Acode       ECF1E0  C6D799
+  Role        FAEADC  E8C4A4
+  Entity      F2F2F2  D5D5D5
+  User        DDE6F1  BCCCE2
+  Undefined   EEE     DDD
+*/
+
+
+/* Visualisation classes for DIVs/Groups/Lists */
+
+.items {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /*border: 2px solid #ddd*/
+}
+
+.acodes {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /*border: 2px solid #C6D799;*/
+}
+
+.roles {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /*border: 2px solid #E8C4A4*/
+}
+
+.entities {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /*border: 2px solid #D5D5D5*/
+}
+
+.users {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding: 0.5em;
+  /*border: 2px solid #BCCCE2*/
+}
+
+.data-item-view {
+  border: 1px solid black;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+
+/* First row in data-item-view */
+
+.data-item-view > div {
+  /*border: 1px solid red;*/
+  line-height: 140%;
+  font-size: 180%;
+}
+
+
+/* Second row in data-item-view */
+
+.data-item-view > div ~ div {
+  line-height: 140%;
+  font-size: 80%;
+}
+
+.data-item-view span {
+  border: 1px solid gray;
+  overflow: visible;
+}
+
+.data-item-view .icon {
+  padding: 0;
+  text-align: center;
+}
+
+.data-item-view .icon::before {
+  content: "\26AA";
+}
+
+.data-item-view .name {
+  font-size: 16pt;
+}
+
+
+/* Visualisation classes for single items, selected items */
+
+.acode-item {
+  background-color: #ECF1E0
+}
+
+.acode-item.selected {
+  background-color: #C6D799
+}
+
+.acode-item .icon::before {
+  content: "✐";
+}
+
+.role-item {
+  background-color: #FAEADC
+}
+
+.role-item.selected {
+  background-color: #E8C4A4
+}
+
+.role-item .icon:before {
+  content: "♣︎";
+}
+
+.entity-item {
+  background-color: #F2F2F2
+}
+
+.entity-item.selected {
+  background-color: #D5D5D5
+}
+
+.entity-item .icon:before {
+  content: "⚙";
+}
+
+.user-item {
+  background-color: #DDE6F1
+}
+
+.user-item.selected {
+  background-color: #BCCCE2
+}
+
+.user-item .icon:before {
+  content: "☺︎";
 }

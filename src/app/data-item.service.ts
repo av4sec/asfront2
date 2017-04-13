@@ -3,7 +3,7 @@ import { Headers, Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
-import { DataItem, DataItemRef } from './data-item';
+import { RawDataItem } from './raw-data-item';
 import { Role } from './role';
 import { Acode } from './acode';
 
@@ -25,7 +25,7 @@ export class DataItemService {
       .toPromise()
       .then(response => {
         // for all DataItems we create the corresponding Role objects
-        let dataItems = response.json() as DataItem[];
+        let dataItems = response.json() as RawDataItem[];
         return dataItems.map(dataItem => new Role(dataItem));
       })
       .catch(this.handleError);
@@ -35,7 +35,7 @@ export class DataItemService {
     const url = `${this.baseUrl}role/${extid}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => new Role(response.json() as DataItem))
+      .then(response => new Role(response.json() as RawDataItem))
       .catch(this.handleError);
   }
 
@@ -45,7 +45,7 @@ export class DataItemService {
       .toPromise()
       .then(response => {
         // for all DataItems we create the corresponding Acode objects
-        let dataItems = response.json() as DataItem[];
+        let dataItems = response.json() as RawDataItem[];
         return dataItems.map(dataItem => new Acode(dataItem));
       })
       .catch(this.handleError);
@@ -55,7 +55,7 @@ export class DataItemService {
     const url = `${this.baseUrl}acode/${extid}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => new Acode(response.json() as DataItem))
+      .then(response => new Acode(response.json() as RawDataItem))
       .catch(this.handleError);
   }
 }

@@ -7,34 +7,22 @@
   </div>
   <router-outlet></router-outlet>
 
-  <h3>Roles</h3>
-  <ul class="roles">
-    <li *ngFor="let item of roles" class="role-item">
-      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
-      <span>{{item.extid}}</span>
-      <span>{{item.name}}</span>
-      <span>{{item.charid}}</span>
-    </li>
-  </ul>
+  <p>Number of selected Items: {{nbSelected}}</p>
+  <div class="row">
+    <div class="roles container col-6">
+      <h3>Roles</h3>
+      <data-item-view *ngFor="let item of roles" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+    </div>
 
-  <h3>Acodes</h3>
-  <ul class="acodes">
-    <li *ngFor="let item of acodes" class="acode-item" [class.selected]="item.extid%3==2">
-      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
-      <span>{{item.extid}}</span>
-      <span>{{item.name}}</span>
-      <span>{{item.charid}}</span>
-    </li>
-  </ul>
+    <div class="acodes container col-6">
+      <h3>Acodes</h3>
+      <data-item-view *ngFor="let item of acodes" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+    </div>
+  </div>
 
-  <h3>Mixed Item List</h3>
-  <ul class="items">
-    <li *ngFor="let item of items" [ngClass]="{'role-item':item.constructor.name === 'Role','acode-item':item.constructor.name === 'Acode','selected':item.extid%3==0}">
-      <span>{{item.constructor.name.charAt(0).toUpperCase()}}</span>
-      <span>{{item.extid}}</span>
-      <span>{{item.name}}</span>
-      <span>{{item.charid}}</span>
-    </li>
-  </ul>
+  <div class="items container col-6">
+    <h3>Mixed Item List</h3>
+    <data-item-view *ngFor="let item of items" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+  </div>
 </div>
 <asfront-footer></asfront-footer>

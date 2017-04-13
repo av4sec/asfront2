@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { DataItem } from './data-item';
 import { Role } from './role';
 import { Acode } from './acode';
 import { DataItemService } from './data-item.service';
@@ -17,6 +18,8 @@ export class AppComponent {
   acodes: Acode[];
   items: any[] = Array();
 
+  nbSelected = 0;
+
   constructor(
     private router: Router,
     private dataItemService: DataItemService)
@@ -25,6 +28,13 @@ export class AppComponent {
   ngOnInit(): void {
     this.getRoles();
     this.getAcodes();
+  }
+
+  selectionChanged(isSelected: boolean, item: DataItem) {
+    if (isSelected)
+      this.nbSelected++;
+    else
+      this.nbSelected--;
   }
 
   getRoles(): void {

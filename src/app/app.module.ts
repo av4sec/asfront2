@@ -10,12 +10,14 @@ import { DataItemService } from './data-item.service';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
+import { DataItemViewComponent } from './data-item-view/data-item-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    DataItemViewComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import { RawDataItem } from './raw-data-item';
 import { Role } from './role';
 import { Acode } from './acode';
+import { Element } from './element';
 
 @Injectable()
 export class DataItemService {
@@ -56,6 +57,26 @@ export class DataItemService {
     return this.http.get(url)
       .toPromise()
       .then(response => new Acode(response.json() as RawDataItem))
+      .catch(this.handleError);
+  }
+
+  getElements(): Promise<Element[]> {
+    const url = `${this.baseUrl}element`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => {
+        // for all DataItems we create the corresponding Element objects
+        let dataItems = response.json() as RawDataItem[];
+        return dataItems.map(dataItem => new Element(dataItem));
+      })
+      .catch(this.handleError);
+  }
+
+  getElement(extid: number): Promise<Element> {
+    const url = `${this.baseUrl}element/${extid}`;
+    return this.http.get(url)
+      .toPromise()
+      .then(response => new Element(response.json() as RawDataItem))
       .catch(this.handleError);
   }
 }

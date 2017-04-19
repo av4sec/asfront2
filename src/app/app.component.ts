@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { DataItem } from './data-item';
 import { Role } from './role';
 import { Acode } from './acode';
+import { Element } from './element';
 import { DataItemService } from './data-item.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class AppComponent {
 
   roles: Role[];
   acodes: Acode[];
+  elements: Element[];
   items: any[] = Array();
 
   nbSelected = 0;
@@ -28,6 +30,7 @@ export class AppComponent {
   ngOnInit(): void {
     this.getRoles();
     this.getAcodes();
+    this.getElements();
   }
 
   selectionChanged(isSelected: boolean, item: DataItem) {
@@ -48,6 +51,13 @@ export class AppComponent {
     this.dataItemService.getAcodes().then(acodes => {
       this.acodes = acodes;
       this.items = this.items.concat(acodes);
+    });
+  }
+
+  getElements(): void {
+    this.dataItemService.getElements().then(elements => {
+      this.elements = elements;
+      this.items = this.items.concat(elements);
     });
   }
 }

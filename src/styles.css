@@ -49,7 +49,7 @@ Item type     Color   Selected Color
   /*border: 2px solid #E8C4A4*/
 }
 
-.entities {
+.elements {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   padding: 0.5em;
@@ -86,7 +86,7 @@ Item type     Color   Selected Color
   font-size: 80%;
 }
 
-.data-item-view span {
+.data-item-view div {
   border: 1px solid gray;
   overflow: visible;
 }
@@ -131,15 +131,15 @@ Item type     Color   Selected Color
   content: "♣︎";
 }
 
-.entity-item {
+.element-item {
   background-color: #F2F2F2
 }
 
-.entity-item.selected {
+.element-item.selected {
   background-color: #D5D5D5
 }
 
-.entity-item .icon:before {
+.element-item .icon:before {
   content: "⚙";
 }
 

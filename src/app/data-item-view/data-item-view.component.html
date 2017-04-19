@@ -1,12 +1,12 @@
 <div class="data-item-view col {{class}}" [class.selected]="selected" (click)="itemSelected()">
   <div class="row">
-    <span class="col-2 icon">&nbsp;</span>
-    <span class="col name ">{{item.name}}</span>
+    <div class="col-2 icon">&nbsp;</div>
+    <div class="col name ">{{item.name}}</div>
   </div>
   <div class="row">
-    <span class="col-2 id ">&nbsp;</span>
-    <span class="col-3 extid ">{{item.extid}}</span>
-    <span class="col charid text-uppercase">{{item.charid}}</span>
+    <div class="col-2 id ">&nbsp;</div>
+    <div class="col-3 extid ">{{item.extid}}</div>
+    <div class="col charid text-uppercase">{{item.charid}}</div>
     <button class="col-2" (click)="buttonClicked();$event.stopPropagation();">⇩</button>
   </div>
 </div>

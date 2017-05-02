@@ -6,5 +6,6 @@ export class RawDataItem {
     extid: number;
     curr: any;
     hist: any[];
+    type?: string;
     deleted?: boolean;
 }

@@ -8,4 +8,8 @@ export class RawDataItem {
     hist: any[];
     type?: string;
     deleted?: boolean;
+
+    constructor(init?: Partial<RawDataItem>) {
+        Object.assign(this, init);
+    }
 }

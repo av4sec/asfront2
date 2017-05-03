@@ -73,15 +73,20 @@ export class DataItemService {
     //console.log("searching " + role)
     for (var key in matcherObj) {
       let queryString = matcherObj[key];
-      let queryRegexp = new RegExp(queryString, "ig")
-      //console.log("  checking for " + key + " > " + queryString)
-      if (obj.hasOwnProperty(key)) {
-        let valueString = String(obj[key])
-        //console.log("    found:" + valueString)
-        if (queryRegexp.exec(valueString) !== null) {
-          matches++;
-          //console.log(role.name + " matches " + key + " with " + valueString)
+      try {
+        let queryRegexp = new RegExp(queryString, "ig")
+
+        //console.log("  checking for " + key + " > " + queryString)
+        if (obj.hasOwnProperty(key)) {
+          let valueString = String(obj[key])
+          //console.log("    found:" + valueString)
+          if (queryRegexp.exec(valueString) !== null) {
+            matches++;
+            //console.log(role.name + " matches " + key + " with " + valueString)
+          }
         }
+      } catch (error) {
+        console.log("Invalid regexp:" + queryString)
       }
     }
     return matches

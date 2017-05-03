@@ -1,5 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+
+// Observable class extensions
+import 'rxjs/add/observable/of';
+
+// Observable operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/switchMap';
 
 import { DataItem } from './data-item';
 import { Role } from './role';
@@ -12,13 +24,13 @@ import { DataItemService } from './data-item.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'asfront2 works!';
+export class AppComponent implements OnInit {
 
-  roles: Role[];
-  acodes: Acode[];
-  elements: Element[];
-  items: any[] = Array();
+  roles: Observable<Role[]>;
+  acodes: Observable<Acode[]>;
+  elements: Observable<Element[]>;
+
+  private searchTerms = new Subject<string>();
 
   nbSelected = 0;
 
@@ -28,9 +40,52 @@ export class AppComponent {
   { }
 
   ngOnInit(): void {
-    this.getRoles();
-    this.getAcodes();
-    this.getElements();
+    console.log('AppComponent ngOnInit')
+
+    this.roles = this.searchTerms
+      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
+      .distinctUntilChanged()   // ignore if next search term is same as previous
+      .switchMap(term => term   // switch to new observable each time the term changes
+        // return the http search observable
+        ? this.dataItemService.searchRole(term)
+        // or the observable of empty heroes if there was no search term
+        : Observable.of<Role[]>([]))
+      .catch(error => {
+        // TODO: add real error handling
+        console.log(error);
+        return Observable.of<Role[]>([]);
+      });
+    this.acodes = this.searchTerms
+      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
+      .distinctUntilChanged()   // ignore if next search term is same as previous
+      .switchMap(term => term   // switch to new observable each time the term changes
+        // return the http search observable
+        ? this.dataItemService.searchAcode(term)
+        // or the observable of empty heroes if there was no search term
+        : Observable.of<Acode[]>([]))
+      .catch(error => {
+        // TODO: add real error handling
+        console.log(error);
+        return Observable.of<Acode[]>([]);
+      });
+    this.elements = this.searchTerms
+      .debounceTime(300)        // wait 300ms after each keystroke before considering the term
+      .distinctUntilChanged()   // ignore if next search term is same as previous
+      .switchMap(term => term   // switch to new observable each time the term changes
+        // return the http search observable
+        ? this.dataItemService.searchElement(term)
+        // or the observable of empty heroes if there was no search term
+        : Observable.of<Element[]>([]))
+      .catch(error => {
+        // TODO: add real error handling
+        console.log(error);
+        return Observable.of<Element[]>([]);
+      });
+  }
+
+  // Push a search term into the observable stream.
+  search(term: string): void {
+    this.searchTerms.next(term);
   }
 
   selectionChanged(isSelected: boolean, item: DataItem) {
@@ -38,26 +93,5 @@ export class AppComponent {
       this.nbSelected++;
     else
       this.nbSelected--;
-  }
-
-  getRoles(): void {
-    this.dataItemService.getRoles().then(roles => {
-      this.roles = roles;
-      this.items = this.items.concat(roles);
-    });
-  }
-
-  getAcodes(): void {
-    this.dataItemService.getAcodes().then(acodes => {
-      this.acodes = acodes;
-      this.items = this.items.concat(acodes);
-    });
-  }
-
-  getElements(): void {
-    this.dataItemService.getElements().then(elements => {
-      this.elements = elements;
-      this.items = this.items.concat(elements);
-    });
   }
 }

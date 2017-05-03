@@ -1,28 +1,25 @@
 <asfront-nav></asfront-nav>
 <div class="container">
-  <div class="starter-template">
-    <h1>
-      <p class="lead"># {{title}} #</p>
-    </h1>
-  </div>
+
   <router-outlet></router-outlet>
 
-  <p>Number of selected Items: {{nbSelected}}</p>
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control" autocomplete="off" autofocus/>
+  <p *ngIf="nbSelected>0">Number of selected Items: {{nbSelected}}</p>
   <div class="row">
-    <div class="roles container col-6">
+    <div class="roles container col-4">
       <h3>Roles</h3>
-      <data-item-view *ngFor="let item of roles" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+      <data-item-view *ngFor="let item of roles | async" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
     </div>
 
-    <div class="acodes container col-6">
+    <div class="acodes container col-4">
       <h3>Acodes</h3>
-      <data-item-view *ngFor="let item of acodes" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+      <data-item-view *ngFor="let item of acodes | async" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
     </div>
-  </div>
 
-  <div class="elements container col-6">
-    <h3>Elements</h3>
-    <data-item-view *ngFor="let item of elements" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+    <div class="elements container col-4">
+      <h3>Elements</h3>
+      <data-item-view *ngFor="let item of elements | async" [item]="item" (select)="selectionChanged($event, item)"></data-item-view>
+    </div>
   </div>
 </div>
 <asfront-footer></asfront-footer>

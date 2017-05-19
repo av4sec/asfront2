@@ -5,7 +5,8 @@ import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { DataItemService } from './data-item.service';
+import { BackendService } from './backend.service';
+import { DataStoreService } from './data-store.service';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -26,7 +27,8 @@ import { DataItemViewComponent } from './data-item-view/data-item-view.component
     AppRoutingModule
   ],
   providers: [
-    DataItemService
+    BackendService,
+    DataStoreService
   ],
   bootstrap: [AppComponent]
 })

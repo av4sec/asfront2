@@ -3,7 +3,7 @@
 
   <router-outlet></router-outlet>
 
-  <!--<input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control" autocomplete="off" autofocus/>-->
+  <input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control" autocomplete="off" autofocus/>
   <p *ngIf="nbSelected>0">Number of selected Items: {{nbSelected}}</p>
   <div class="row">
     <div class="roles container col-4">

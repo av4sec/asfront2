@@ -18,3 +18,8 @@ export class DataItem {
         this.charid = dataItem.curr.charid;
     }
 }
+
+// Currently implemented types
+export enum DataItemType {
+    role, acode, element
+};

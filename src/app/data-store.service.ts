@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, BehaviorSubject } from 'rxjs'
-import 'rxjs/add/operator/toPromise';
 
 import { BackendService } from './backend.service';
 

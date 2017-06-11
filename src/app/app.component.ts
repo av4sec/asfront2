@@ -1,23 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-
+import {Component, OnInit} from "@angular/core";
 // Observable class extensions
-import 'rxjs/add/observable/of';
-
+import "rxjs/add/observable/of";
 // Observable operators
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/switchMap';
-
-import { DataStoreService } from './data-store.service';
-import { DataItem, DataItemType } from './data-item';
-import { Role } from './role';
-import { Acode } from './acode';
-import { Element } from './element';
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/debounceTime";
+import "rxjs/add/operator/distinctUntilChanged";
+import "rxjs/add/operator/switchMap";
 
 @Component({
   selector: 'asfront-root',
@@ -26,77 +14,9 @@ import { Element } from './element';
 })
 export class AppComponent implements OnInit {
 
-  roles: Observable<Role[]>;
-  acodes: Observable<Acode[]>;
-  elements: Observable<Element[]>;
-
-  private searchTerms = new Subject<string>();
-
-  nbSelected = 0;
-
-  constructor(
-    private router: Router,
-    private dataStoreService: DataStoreService
-  )
-  { }
+  constructor() {
+  }
 
   ngOnInit(): void {
-    console.log('AppComponent ngOnInit')
-    this.roles = this.dataStoreService.getItems(DataItemType.role);
-    this.acodes = this.dataStoreService.getItems(DataItemType.acode);
-    this.elements = this.dataStoreService.getItems(DataItemType.element);
-
-    this.roles = this.searchTerms
-      .debounceTime(100)        // wait 100ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the search observable
-        ? this.dataStoreService.searchItemsMatching(DataItemType.role, term)
-        // or the observable of empty items if there was no search term
-        : Observable.of<Role[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Role[]>([]);
-      });
-
-    this.acodes = this.searchTerms
-      .debounceTime(100)        // wait 100ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the search observable
-        ? this.dataStoreService.searchItemsMatching(DataItemType.acode, term)
-        // or the observable of empty items if there was no search term
-        : Observable.of<Acode[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Acode[]>([]);
-      });
-    this.elements = this.searchTerms
-      .debounceTime(100)        // wait 100ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the search observable
-        ? this.dataStoreService.searchItemsMatching(DataItemType.element, term)
-        // or the observable of empty items if there was no search term
-        : Observable.of<Element[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Element[]>([]);
-      });
-  }
-
-  // Push a search term into the observable stream.
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
-
-  selectionChanged(isSelected: boolean, item: DataItem) {
-    if (isSelected)
-      this.nbSelected++;
-    else
-      this.nbSelected--;
   }
 }

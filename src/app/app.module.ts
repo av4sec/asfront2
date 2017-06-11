@@ -12,19 +12,27 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { FooterComponent } from './footer/footer.component';
 import { DataItemViewComponent } from './data-item-view/data-item-view.component';
+import { MainComponent } from './main/main.component';
+import {RouterModule, Routes} from "@angular/router";
+import { AdminComponent } from './admin/admin.component';
+
+const appRoutes: Routes = [{path: '', component: MainComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
-    DataItemViewComponent
+    DataItemViewComponent,
+    MainComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     BackendService,

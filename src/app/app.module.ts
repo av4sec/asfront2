@@ -16,7 +16,9 @@ import { MainComponent } from './main/main.component';
 import {RouterModule, Routes} from "@angular/router";
 import { AdminComponent } from './admin/admin.component';
 
-const appRoutes: Routes = [{path: '', component: MainComponent}
+const appRoutes: Routes = [
+  {path: '', component: MainComponent},
+  {path: 'admin', component: AdminComponent},
 ];
 
 @NgModule({

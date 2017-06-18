@@ -20,8 +20,7 @@ export class AuthService {
   }
 
   authenticate(userDetail: UserDetail): PromiseLike<AuthenticationResult> {
-    // TODO martinlinha: Change port for backend
-    return this.http.post('http://localhost:8080/api/user', userDetail)
+    return this.http.post('/api/user', userDetail)
       .toPromise().then(resp => {
         if (resp.status == 200) {
           localStorage.setItem("token", resp.json().token);
